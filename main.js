@@ -8,15 +8,11 @@ const pid = 'PL2pfG9YtKxMJVwlAjAIV9TBF5-44WnQ-q';
 const num = 5;
 const resultURL = `${baseURL}?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
 
-//일정 글자수 이살일때 글자 자르고 말줄임표 붙이기
-//문자열.substr(시작위치,자를글자수)
-
-//beef-lettuce-tomato --> Beef Lettuce Tomato
 let text = 'beef-lettuce-tomato';
 text = text
-	.split('-') //기존 문자열에서 -를 기준으로 분리
-	.map((el) => el.charAt(0).toUpperCase() + el.slice(1)) //분리된 문자값을 반복돌면서 첫번째 글자만 대문자변경+첫번째를 제외한 나머지 문자를 이어붙힘 (각 단어의 첫글자만 대문자로 변경되서 배열로 변환)
-	.join(' '); //첫글자만 대문자로 변경된 단어들을 다시 빈칸으로 이어붙이기
+	.split('-')
+	.map((el) => el.charAt(0).toUpperCase() + el.slice(1))
+	.join(' ');
 console.log(text);
 
 fetch(resultURL)
@@ -29,7 +25,6 @@ fetch(resultURL)
 			let desc = data.snippet.description;
 			desc.length > 120 ? (desc = desc.substr(0, 120) + '...') : desc;
 
-			//날짜값 가공
 			let date = data.snippet.publishedAt.split('T')[0];
 			date = date.split('-').join('.');
 
@@ -46,6 +41,7 @@ fetch(resultURL)
         </div>
         <div class='pic'>
           <img src='${data.snippet.thumbnails.standard.url}'
+        </div>
       </article>
       `;
 		});
