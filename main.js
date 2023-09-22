@@ -11,6 +11,14 @@ const resultURL = `${baseURL}?key=${api_key}&part=snippet&playlistId=${pid}&maxR
 //일정 글자수 이살일때 글자 자르고 말줄임표 붙이기
 //문자열.substr(시작위치,자를글자수)
 
+//beef-lettuce-tomato --> Beef Lettuce Tomato
+let text = 'beef-lettuce-tomato';
+text = text
+	.split('-')
+	.map((el) => el.charAt(0).toUpperCase() + el.slice(1))
+	.join(' ');
+console.log(text);
+
 fetch(resultURL)
 	.then((data) => data.json())
 	.then((json) => {
