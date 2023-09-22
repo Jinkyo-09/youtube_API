@@ -8,12 +8,17 @@ const pid = 'PL2pfG9YtKxMJVwlAjAIV9TBF5-44WnQ-q';
 const num = 5;
 const resultURL = `${baseURL}?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
 
-let text = 'beef-lettuce-tomato';
-text = text
-	.split('-')
-	.map((el) => el.charAt(0).toUpperCase() + el.slice(1))
-	.join(' ');
-console.log(text);
+//이벤트 위임 (event delegation)
+//동적으로 생성되는 요소에 이벤트 연결이 불가, 이벤트 연결 시점에는 해당 돔이 생성되지 않았기 때문
+//항상 존재하는 body요소에 이벤트를 위임해서 추후 동적 dom이 생성되면 이벤트를 전달받도록 처리
+
+window.addEventListener('click', (e) => {
+	//e.currentTarget : 이벤트가 연결되어있는 선택자를 반환
+	//e.target : 실제화면상에서 이벤트가 발생한 요소를 반환
+	if (e.target.nodeName === 'IMG') {
+		console.log('You clicked Pic');
+	}
+});
 
 fetch(resultURL)
 	.then((data) => data.json())
